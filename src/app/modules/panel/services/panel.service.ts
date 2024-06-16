@@ -1,13 +1,13 @@
 import { DestroyRef, inject, Injectable, Signal, signal } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { SessionStorageService } from '../../../core/services/session-storage.service';
+import { patterns } from '../../../shared/const/patterns.const';
+import { urlToDomain } from '../../../shared/utils/utils';
 import { Location } from '../models/location.interface';
 import { PanelApiService } from './panel-api.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { SessionStorageService } from '../../../core/services/session-storage.service';
-import { FormControl, Validators } from '@angular/forms';
-import { patterns } from '../../../shared/const/patterns.const';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class PanelService {
@@ -39,9 +39,10 @@ export class PanelService {
     if (this.searchControl.invalid || !this.searchControl.value) {
       return;
     }
+    const parsedInput = urlToDomain(this.searchControl.value);
 
-    this.getByIpOrUrl(this.searchControl.value);
-    this.addToSearchHistory(this.searchControl.value);
+    this.getByIpOrUrl(parsedInput);
+    this.addToSearchHistory(parsedInput);
     this.searchControl.reset();
   }
 

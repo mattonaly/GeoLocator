@@ -14,3 +14,8 @@ export function convertKeysToCamelCase(obj: any): any {
   }
   return obj;
 }
+
+export function urlToDomain(url: string): string {
+  const domain = url.replace(/(https?:\/\/)?(www\.)?/, '');
+  return domain.split('/')[0];
+}
