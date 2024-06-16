@@ -1,27 +1,51 @@
-# GeoLocator
+# IP Geolocation Web Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+## Overview
 
-## Development server
+This web application displays the location of a provided IP address or URL on a map. It is designed as a Single Page Application (SPA) using Angular, with geolocation data provided by the ipstack API and map rendering by Leaflet with OpenStreetMap.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- **User IP Location Display**: On landing, the application displays the user's IP address and its location on the map.
+- **Search Functionality**: Users can enter an IP address or URL in the search box to locate it on the map.
+- **Error Handling**: If an invalid IP address or URL is entered, an appropriate error message is displayed.
+- **Search History**: The application stores the history of searched locations during the session, allowing users to revisit previous searches.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Technology Stack
 
-## Build
+- **Frontend**: Angular
+- **API**: ipstack for geolocation data
+- **Map**: Leaflet with OpenStreetMap
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Installation
 
-## Running unit tests
+### Prerequisites
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Node.js
+- npm (Node Package Manager)
 
-## Running end-to-end tests
+### Running the Application
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. Install packages
+   ```sh
+   npm install
+   ```
+2. Start the development server:
 
-## Further help
+   ```sh
+   npm start
+   ```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+3. Open your browser and navigate to `http://localhost:4200`
+
+## Usage
+
+1. **Display User IP**: The application automatically displays the user's IP location on the map upon loading.
+2. **Search Location**: Use the search box to enter an IP address or URL to view its location on the map.
+3. **Handle Errors**: Invalid IP addresses or URLs will trigger an error message.
+4. **Search History**: The application maintains a history of searched locations for the current session.
+
+## Example
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/be64c191-374d-4ea7-8a97-e10ba506d540/deploy-status)](https://app.netlify.com/sites/dancing-entremet-0eaefe/deploys)
+[Demo](https://main--dancing-entremet-0eaefe.netlify.app/)
