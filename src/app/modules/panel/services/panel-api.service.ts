@@ -15,29 +15,25 @@ export class PanelApiService {
   protected readonly httpClient = inject(HttpClient);
 
   getMyLocation(): Observable<Location> {
-    return this.httpClient
-      .get<Location>(`${this.apiUrl}/check`, { params: this.requestParams() })
-      .pipe(
-        map((response) => convertKeysToCamelCase(response)),
-        this.handleApiResponse<Location>,
-      );
+    return this.httpClient.get<Location>(this.getApiUrl('/check')).pipe(
+      map((response) => convertKeysToCamelCase(response)),
+      this.handleApiResponse<Location>,
+    );
   }
 
   getByIpOrUrl(search: string): Observable<Location> {
-    return this.httpClient
-      .get<Location>(`${this.apiUrl}/${search}`, {
-        params: this.requestParams(),
-      })
-      .pipe(
-        map((response) => convertKeysToCamelCase(response)),
-        this.handleApiResponse<Location>,
-      );
+    return this.httpClient.get<Location>(this.getApiUrl(`/${search}`)).pipe(
+      map((response) => convertKeysToCamelCase(response)),
+      this.handleApiResponse<Location>,
+    );
   }
 
-  private requestParams(): HttpParams {
-    return new HttpParams().appendAll({
-      ['access_key']: this.apiKey,
-    });
+  private requestParams(): string {
+    return new HttpParams()
+      .appendAll({
+        ['access_key']: this.apiKey,
+      })
+      .toString();
   }
 
   private handleApiResponse<T>(
@@ -54,5 +50,13 @@ export class PanelApiService {
         return throwError(() => error);
       }),
     );
+  }
+
+  private getApiUrl(url: string): string {
+    const apiUrl = `${environment.apiUrl}${url}?${this.requestParams()}`;
+
+    return environment.production
+      ? environment.corsUrl + encodeURIComponent(apiUrl)
+      : apiUrl;
   }
 }
