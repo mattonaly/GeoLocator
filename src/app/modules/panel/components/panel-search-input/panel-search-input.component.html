@@ -1,0 +1,15 @@
+<mat-form-field appearance="outline" class="input">
+  <mat-label>Search for an ip of a url</mat-label>
+  <input
+    matInput
+    placeholder="8.8.8.8"
+    [formControl]="control"
+    (keydown.enter)="submit()"
+  />
+  @if (control.hasError("pattern")) {
+    <mat-error> Please enter a valid ip address or url </mat-error>
+  }
+  @if (control.hasError("required")) {
+    <mat-error> This field is required </mat-error>
+  }
+</mat-form-field>

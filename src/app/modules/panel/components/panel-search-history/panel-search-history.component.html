@@ -1,0 +1,21 @@
+<h5>Search history</h5>
+
+<section>
+  @if (!searchHistory().length) {
+    <p>No search history</p>
+  }
+
+  <mat-list>
+    @for (entry of searchHistory(); let index = $index; track index) {
+      <mat-list-item>
+        <button
+          mat-button
+          matTooltip="Click to apply search"
+          (click)="applySearch(entry)"
+        >
+          {{ entry }}
+        </button>
+      </mat-list-item>
+    }
+  </mat-list>
+</section>

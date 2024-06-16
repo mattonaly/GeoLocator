@@ -1,0 +1,19 @@
+@if (label) {
+  <h5>{{ label }}</h5>
+}
+
+<section>
+  @if (location) {
+    <p>
+      {{ location.location.countryFlagEmoji }}
+      {{ location.city }}, {{ location.regionCode }}, {{ location.countryName }}
+    </p>
+    <p>IP: {{ location.ip }} ({{ location.type }})</p>
+    <p>Lat: {{ location.latitude }}</p>
+    <p>Lng: {{ location.longitude }}</p>
+    <p>Calling code: +{{ location.location.callingCode }}</p>
+    <p>Capital: {{ location.location.capital }}</p>
+  } @else {
+    <p>No location selected</p>
+  }
+</section>
